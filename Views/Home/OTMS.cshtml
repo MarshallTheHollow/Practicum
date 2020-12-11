@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Практика ОТМС";
+    <link rel="StyleSheet" href="~/css/StyleSheet.css">
+}
+<h1>@ViewData["Title"]</h1>
+<br />
+<p>Исходные данные</p>
+<form action="/Home/OTMS" method="post">
+    <div class="form-group">
+        <input type="text" name="oI.Ho" placeholder="(Ho) Высота слоя" size="35" />
+        <input type="text" name="oI.temp" placeholder="(t) Температура материала" size="35" />
+        <input type="text" name="oI._Temp" placeholder="(T) Температура газа" size="35" />
+    </div>
+    <div class="form-group">
+        <input type="text" name="oI.wr" placeholder="(wr) Скорость газа" size="35" />
+        <input type="text" name="oI.Cr" placeholder="(Cr) Средняя теплоемкость газа" size="35" />
+        <input type="text" name="oI.Gm" placeholder="(Gm) Расход материалов" size="35" />
+    </div>
+    <div class="form-group">
+        <input type="text" name="oI.Cm" placeholder="(Cm) Теплоемкость материалов" size="35" />
+        <input type="text" name="oI.aV" placeholder="(aV) Коэффициент теплоотдачи" size="35" />
+        <input type="text" name="oI.D" placeholder="(D) Диаметр аппарата" size="35" />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+@if (ViewBag.Ylist != null)
+{
+    <h2>Ответ</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table">
+                <tbody>
+                <tr><th>Координаты</th>@for (double i = 0; i <= ViewBag.Ho; i += 0.5)
+                    {<th>@i</th>}</tr>
+                    <tr><td><img src='https://sun9-65.userapi.com/impf/y3rSzYIH-JLGDCqDgh8ROxHJcelHaULOrGjZuw/-pkyz5MgTvI.jpg?size=86x45&quality=96&proxy=1&sign=d3154a0e324cb85dbf0e9ac7257a616d&type=album' alt='Y' /></td>@foreach (double Y in ViewBag.Ylist)
+                    {<td>@Y</td>}</tr>
+                    <tr><td><img src='https://sun9-63.userapi.com/impf/dPgPnJH4AOsOgvo2iUFgQq72hOltAcesZa__KQ/FXmtU8mxV8c.jpg?size=197x55&quality=96&proxy=1&sign=1fc05f8ad122c7618e3886db03236fba&type=album' alt='Exp' /></td>@foreach (double Exp in ViewBag.explist)
+                    {<td>@Exp</td>}</tr>
+                    <tr><td><img src='https://sun9-45.userapi.com/impf/wGxlxXxdnpylcBWLIuQMaFKqoJTDjHeSldONWA/qZxS0v5GJGk.jpg?size=195x49&quality=96&proxy=1&sign=eb07317180900582c68b6b5dfa535406&type=album' alt='Mexp' /></td>@foreach (double Mexp in ViewBag.mexplist)
+                    {<td>@Mexp</td>}</tr>
+                    <tr><td><img src='https://sun9-65.userapi.com/impf/NM6-VE6nISJ_apmsjv3HetVAORFnjwm4Yfbz1A/n_htmr5GwV0.jpg?size=27x20&quality=96&proxy=1&sign=13daf357afc2e9c0c39632c33ee7cd27&type=album' alt='U' /></td>@foreach (double U in ViewBag.ulist)
+                    {<td>@U</td>}</tr>
+                    <tr><td><img src='https://sun9-42.userapi.com/impf/E4kX5tL8sfakMUxgLIpmuLUHukoQfGTQuyzytg/HRjB1q-W00A.jpg?size=21x28&quality=96&proxy=1&sign=7b801ed4e65ee1704fccf7a89a590b9b&type=album' alt='O' /></td>@foreach (double O in ViewBag.olist)
+                    {<td>@O</td>}</tr>
+                    <tr><td><img src='https://sun9-33.userapi.com/impf/Uwk4Rzkl3YBgqA53hrqoyLw6F_JKv8UDtBjbhA/Jf7wvua2JM8.jpg?size=170x35&quality=96&proxy=1&sign=41fc5698d9ed19cdade721e473ac6ae9&type=album' alt='t' /></td>@foreach (double t in ViewBag.tlist)
+                    {<td>@t</td>}</tr>
+                    <tr><td><img src='https://sun9-47.userapi.com/impf/ic9NyPb5nCrEcoflvihi4tOAYxOmWkEJaXvxew/CGyRUP6Vkbw.jpg?size=166x31&quality=96&proxy=1&sign=f6300899aabc24d179312c2a88a20627&type=album' alt='T' /></td>@foreach (double T in ViewBag._Tlist)
+                    {<td>@T</td>}</tr>
+                    <tr><td>Разность температур</td>@foreach (double Temp in ViewBag.Templist)
+                    {<td>@Temp</td>}</tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
