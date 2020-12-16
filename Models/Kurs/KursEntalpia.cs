@@ -14,13 +14,9 @@ namespace Practicum.Models.Kurs
             {
                 Epp = 2.2054 * T + 2372.1;
             }
-            if (P == 4.5)
-            {
-                Epp = 2.5149 * T + 2200.9;
-            }
             else
             {
-                return 0;
+                Epp = 2.5149 * T + 2200.9;
             }
             return Epp;
         }
@@ -29,15 +25,11 @@ namespace Practicum.Models.Kurs
             double Epv;
             if (P == 1.8)
             {
-                Epv = 4.3104 * T - 13.41;
-            }
-            if (P == 4.5)
-            {
-                Epv = 4.3104 * T - 9.9143;
+                Epv = 4.3223 * T - 13.41;
             }
             else
             {
-                return 0;
+                Epv = 4.3104 * T - 9.9143;
             }
             return Epv;
         }

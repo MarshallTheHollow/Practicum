@@ -31,9 +31,9 @@ namespace Practicum.Models.Kurs
             KursEntalpia ke = new KursEntalpia();
             Vn0 = kup._Vd0 * (1 + 0.5 * ki.DpodVos);
             Qvip = Vn0 * ki.Ksavetemp * (ke.EntalpiaSum(ki.tdn) - ke.EntalpiaSum(tdk));
-            Qpp = kp.Vd0 * ki.Ksavetemp * (ke.EntalpiaSum(pip.PIPCalc(ki)) - ke.EntalpiaSum(pp.PPCalc(ki, pip)));
-            Ekv = ke.EntalpiaPV(ki.TempNagr, ki.P);
-            Epv = ke.EntalpiaPV(ki.tpv, ki.P);
+            Qpp = kp.Vd0 * ki.Ksavetemp * (ke.EntalpiaSum(pip.PIPCalc(ki)) - ke.EntalpiaSum(pp.PPCalc(ki, pip)));           
+            Ekv = ke.EntalpiaPV(ki.TempNagr, ki.P);            
+            Epv = ke.EntalpiaPV(ki.tpv, ki.P);           
             Enp = ke.EntalpiaPP(ki.TempNagr, ki.P);
             EppR = ((Qvip * Enp) - Qpp * (Epv - (ki.n*(Ekv-Epv))))/(Qvip-Qpp);
             EppT = ke.EntalpiaPP(kup._tpp, ki.P);
