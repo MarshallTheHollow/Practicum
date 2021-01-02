@@ -33,9 +33,13 @@ namespace Practicum.Models.Kurs
             }
             return Epv;
         }
-        public double EntalpiaSum(double T)
+        public double EntalpiaSum(double T, double CO2, double H2O, double N2, double O2)
         {
-            double EgSum = (0.0002 * Math.Pow(T, 2)) + (1.338 * T) + 1.9992;
+            double eCO2 = (0.0004 * Math.Pow(T, 2)) + (1.8505 * T) - 22.683;
+            double eH2O = (0.0003 * Math.Pow(T, 2)) + (1.4428 * T) + 3.65;
+            double eN2 = (0.0001 * Math.Pow(T, 2)) + (1.2423 * T) + 5.7667;
+            double eO2 = (0.0001 * Math.Pow(T, 2)) + (1.3396 * T) - 6.3333;
+            double EgSum = (eCO2*(CO2/100)) + (eH2O*(H2O/100))+(eN2*(N2/100))+(eO2*(O2/100));
             return EgSum;
         }
     }

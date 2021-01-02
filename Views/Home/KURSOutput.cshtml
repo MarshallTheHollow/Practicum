@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Результаты расчета";
+}
+<h1>@ViewData["Title"]</h1>
+<br />
+
+<body style="background: linear-gradient(#819ef6, #3d46dd)">
+    <div style="width: 50%;">
+        <canvas id="myChart1" style="width: 100%; height: 400px;"></canvas>
+    </div>
+    <br />
+    <h3>Паропроизводительность: @ViewBag.ParoProisvod кг/с</h3>
+    <h5>Количество теплоты, переданное воде и пару: @ViewBag.Qvip кВт</h5>
+    <h5>Количество теплоты, переданное в пароперегревателе: @ViewBag.Qpp кВт</h5>
+    <h5>Энтальпия кипящей воды: @ViewBag.Ekv кг/с</h5>
+    <h5>Энтальпия питательной воды: @ViewBag.Epv кг/с</h5>
+    <h5>Энтальпия сухого насыщенного пара: @ViewBag.Enp кг/с</h5>
+    <h5>Расчетная энтальпия сухого перегретого пара: @ViewBag.EppR кг/с</h5>
+    <h5>Теоретическая энтальпия сухого перегретого пара: @ViewBag.EppT кг/с</h5>
+    <h5>Погрешность: @ViewBag.PogRech %</h5>
+</body>
+
+
+<script src="~/js/Chart.js"></script>
+<script>
+    var graphDataNames = ['ПИП','ПП','ИС','Экономайзер'];
+    var graphDataSums = @Html.Raw(ViewBag.Temperatures);
+
+var ctx = document.getElementById('myChart1').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: graphDataNames,
+        datasets: [{
+            label: 'Температура дыма на выходах разных секций(°C)',
+            lineTension: 0,
+            data: graphDataSums,
+            backgroundColor: 'rgba(147, 13, 218, 0.50)',
+            borderColor: [
+                'red',
+                'green',
+                'yellow',
+                'blue'
+            ],
+            borderWidth: 1,
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    fontColor: '#eeeeee'
+                },
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: '#eeeeee'
+                },
+            }]
+        },
+        legend: {
+            labels: {
+                fontColor: "#eeeeee",
+                fontSize: 18
+            }
+        }
+    }
+});
+</script>

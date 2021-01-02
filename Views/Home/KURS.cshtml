@@ -1,9 +1,190 @@
 ﻿@{
     ViewData["Title"] = "Курсовой проект";
-    <link rel="StyleSheet" href="~/css/StyleSheet.css">
 }
-<h1>@ViewData["Title"]</h1>
 
-<div class="centerLayer">
-    <p>На данной странице ведутся ремонтные работы...</p>
-</div>
+<h1>@ViewData["Title"]</h1>
+<br />
+<h4>Исходные данные:</h4>
+<body style="background: linear-gradient(#819ef6, #3d46dd)">
+    <form action="/Home/KURSOutput" method="post">
+        <div class="form-group" style="color:#eeeeee">
+            <button class="btn btn-primary" type="button" value="Показать" onclick="this.value=this.value=='Показать'?'Скрыть':'Показать';" style="background-color:#dedeff; color:#0c19ac; font: bold 14px arial">Настройка для продвинутых пользователей</button>
+            <div class="spoiler">
+                <div style="background-color: rgba(0, 0, 0, 0.25);border-radius: 20px 20px 20px 20px; padding:20px; max-width: 74%">
+                    <h6 style="display:inline; padding-right:109px">Доля подсасываемого воздуха</h6>
+                    <h6 style="display:inline">Термическое сопротивление отложений на трубах</h6>
+                    <br />
+                    <input type="text" class="Koefftext" name="ki.DpodVos" value="0,1" size="25" style="margin-right:119px" required />
+                    <input type="text" class="Koefftext" name="ki.TermSop" value="0" size="25" required />
+                    <br />
+                    <h6 style="display:inline; padding-right:30px">Степень черноты стенок трубного пакета</h6>
+                    <h6 style="display:inline; padding-right:30px">Коэффициент сохранения тепла</h6>
+                    <br />
+                    <input type="text" class="Koefftext" name="ki.StepBlackPak" value="0,8" size="25" style="margin-right:119px" required />
+                    <input type="text" class="Koefftext" name="ki.Ksavetemp" value="0,9" size="25" required />
+                    <div class="warning-Koeff" style=" font-weight: bold; height: 1rem"></div>
+                    <br />
+                    <h6>Степень продувки (в %)</h6>
+                    <input type="text" class="text" name="ki.n" value="10" size="25" required />
+                    <div class="warning-percent" style="font-weight: bold; height:1rem"></div>
+                </div>
+            </div>
+            <br />
+            <h5>Температуры (в °С)</h5>
+            <h6 style="display:inline; padding-right:207px">Температура газа на входе</h6>
+            <h6 style="display:inline">Температура питательной воды</h6>
+            <br />
+            <input type="text" class="text" name="ki.tdn" placeholder="tdn" size="50" required />
+            <input type="text" class="text" name="ki.tpv" placeholder="tpv" size="50" required />
+            <br /> <br />
+            <h5>Состав газа (в %)</h5>
+            <h6 style="display:inline; padding-right:333px">Доля СО2</h6>
+            <h6 style="display:inline">Доля Н2О</h6>
+            <br />
+            <input type="text" id="co2" class="Gastext" name="ki.CO2" placeholder="CO2" size="50" required />
+            <input type="text" id="h2o" class="Gastext" name="ki.H2O" placeholder="H2O" size="50" required />
+            <br />
+            <h6 style="display:inline; padding-right:343px">Доля О2</h6>
+            <h6 style="display:inline">Доля N2</h6>
+            <br />
+            <input type="text" id="o2" class="Gastext" name="ki.O2" placeholder="O2" size="50" required />
+            <input type="text" id="n2" class="Gastext" name="ki.N2" placeholder="N2" size="50" required />
+            <div class="warning-message" style="font-weight: bold; height:1rem"></div>
+            <br />
+            <h6 style="display:inline; padding-right:109px">Выберите давление</h6>
+            <h6 style="display:inline">Выберите тип котла</h6><br />
+            <input type="radio" name="ki.P" value="1,8" required />
+            <span style="margin-right:185px">1.8 МПа</span>
+            <select name="ki.KUcount" class="text"><option value="40">КУ40</option><option value="60">КУ60</option><option value="80">КУ80</option><option value="100">КУ100</option><option value="125">КУ125</option><option value="150">КУ150</option></select><br />
+            <input type="radio" name="ki.P" value="4,5" required />
+            <span>4.5 МПа</span> <br />
+        </div>
+        <button type="submit" class="myprimary" style="background-color:aliceblue; font: bold 14px arial; border-radius: 10px; padding: 5px">Посчитать</button>
+    </form>
+</body>
+
+<script>  
+    const xyz = document.querySelectorAll('.Gastext');
+    xyz.forEach((elem) => {
+        elem.addEventListener('blur', function (event) {
+            const GasSum = parseInt(n2.value) + parseInt(o2.value) + parseInt(h2o.value) + parseInt(co2.value);            
+            if (document.querySelector('.Lesh')) {
+                document.querySelector('.Lesh').remove();
+            }
+            let text;
+            if (GasSum != 100) {
+                text = document.createElement("p");
+                text.classList.add("Lesh");
+                text.textContent = "Пропорции газа должны быть равны в сумме 100";
+                text.style.color = "#d61e1e";
+                document.querySelector('.warning-message').appendChild(text);
+            }
+            ButtCheck();
+        })
+    })   
+
+    const koeff = document.querySelectorAll('.Koefftext');
+    koeff.forEach((elemy) => {
+        elemy.addEventListener('blur', function (event) {
+            if (document.querySelector('.Leshy')) {
+                document.querySelector('.Leshy').remove();
+            }
+            let texty;
+            if (elemy.value > 1 || elemy.value <0) {
+                texty = document.createElement("p");
+                texty.classList.add("Leshy");
+                texty.textContent = "Коэффициенты должны быть в промежутке от 0 до 1";
+                texty.style.color = "#d61e1e";
+                document.querySelector('.warning-Koeff').appendChild(texty);
+            }
+            ButtCheck();
+        })
+    })  
+
+    const percent = document.querySelector('.text');
+    percent.addEventListener('blur', function (event) {
+        if (document.querySelector('.Leshyy')) {
+            document.querySelector('.Leshyy').remove();
+        }
+        let texty;
+        if (percent.value > 100 || percent.value < 0) {
+            textyy = document.createElement("p");
+            textyy.classList.add("Leshyy");
+            textyy.textContent = "Степень продувки должна быть в промежутке от 0 до 100";
+            textyy.style.color = "#d61e1e";
+            document.querySelector('.warning-percent').appendChild(textyy);
+        }
+        ButtCheck();
+    });
+
+    function ButtCheck() {
+        if (document.querySelector('.warning-percent').textContent != "" || document.querySelector('.warning-Koeff').textContent != "" || document.querySelector('.warning-message').textContent != "" ) {
+            console.log(document.querySelector('.warning-percent').textContent);
+            document.querySelector('.myprimary').style.display = 'none';
+        }
+        else {
+            console.log(document.querySelector('.warning-percent').textContent);
+            document.querySelector('.myprimary').style.display = '';
+        }
+    }  
+</script>
+
+<style type="text/css">
+
+    .spoiler {
+        overflow: hidden;
+    }
+
+    .btn-primary[value="Показать"] + .spoiler > div {
+        margin-top: -100%;
+    }
+
+    .btn-primary[value="Скрыть"] + .spoiler {
+        padding: 20px;
+    }
+
+    .myprimary {
+        border-color: #1c1a9f;
+        color: #0c19ac;
+    }
+
+    .myprimary:active{
+        outline: none;
+        color: #9211ae;
+        box-shadow: 0px 0px 15px rgba(233, 24, 224, 1)
+    }
+    .Gastext {
+        background-color: rgba(255, 255, 255, 0.5);
+        color: #222222;
+        border-color: rgba(0, 0, 0, 0.51);
+        border-radius: 10px 10px 10px 10px;
+        padding: 2px;
+    }
+
+        .Gastext:hover {
+            background-color: rgba(255, 255, 255, 0.75);
+        }
+
+        .Gastext:focus {
+            box-shadow: 0px 0px 10px #ea26e1;
+            outline: none;
+        }
+
+    .Koefftext {
+        background-color: rgba(255, 255, 255, 0.5);
+        color: #222222;
+        border-color: rgba(0, 0, 0, 0.51);
+        border-radius: 10px 10px 10px 10px;
+        padding: 2px;
+    }
+
+        .Koefftext:hover {
+            background-color: rgba(255, 255, 255, 0.75);
+        }
+
+        .Koefftext:focus {
+            box-shadow: 0px 0px 10px #ea26e1;
+            outline: none;
+        }
+</style>
+

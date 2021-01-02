@@ -58,7 +58,7 @@ body {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #212529;
+  color: #dc3545;
   text-align: left;
   background-color: #fff;
 }
@@ -547,6 +547,7 @@ pre code {
 
 .container {
   width: 100%;
+  max-height: 100px;
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
@@ -1988,6 +1989,7 @@ select.form-control:focus::-ms-value {
 
 select.form-control[size], select.form-control[multiple] {
   height: auto;
+  border-radius: 10px 10px 10px 10px;
 }
 
 textarea.form-control {
@@ -1996,6 +1998,7 @@ textarea.form-control {
 
 .form-group {
   margin-bottom: 1rem;
+  color:#3556a3;
 }
 
 .form-text {
@@ -2423,6 +2426,7 @@ fieldset:disabled a.btn {
   color: #fff;
   background-color: #007bff;
   border-color: #007bff;
+  padding:50px;
 }
 
 .btn-primary:hover {
@@ -4101,7 +4105,7 @@ input[type="button"].btn-block {
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-  color: #495057;
+  color: #eeeeee;
   background-color: #fff;
   border-color: #dee2e6 #dee2e6 #fff;
 }
@@ -4154,7 +4158,7 @@ input[type="button"].btn-block {
   align-items: center;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  padding: 0.5rem 1rem;
+  padding: 0.25rem 0.5rem;
 }
 
 .navbar > .container,
@@ -4241,7 +4245,7 @@ input[type="button"].btn-block {
   background-size: 100% 100%;
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 400px) {
   .navbar-expand-sm > .container,
   .navbar-expand-sm > .container-fluid {
     padding-right: 0;
@@ -4249,7 +4253,7 @@ input[type="button"].btn-block {
   }
 }
 
-@media (min-width: 576px) {
+@media (min-width: 400px) {
   .navbar-expand-sm {
     -ms-flex-flow: row nowrap;
     flex-flow: row nowrap;
@@ -6568,13 +6572,13 @@ button.bg-danger:focus {
 }
 
 .bg-light {
-  background-color: #f8f9fa !important;
+  background-color: #ffc107 !important;
 }
 
 a.bg-light:hover, a.bg-light:focus,
 button.bg-light:hover,
 button.bg-light:focus {
-  background-color: #dae0e5 !important;
+  background-color: #ffc107 !important;
 }
 
 .bg-dark {

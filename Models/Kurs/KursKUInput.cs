@@ -38,7 +38,7 @@ namespace Practicum.Models.Kurs
                 tpp = 375;
                 tdkEtalon = 248;
                 tdnEtalon = 850;
-                Vd0 = 40000 / 3600;
+                Vd0 = 11.11;
                 Sopr = 1.12 * 1000;
                 
             }
@@ -48,7 +48,7 @@ namespace Practicum.Models.Kurs
                 tpp = 385;
                 tdkEtalon = 248;
                 tdnEtalon = 850;
-                Vd0 = 40000 / 3600;
+                Vd0 = 11.11;
                 Sopr = 1.12 * 1000;
             }
             if (ki.KUcount == 60 && ki.P == 1.8)
@@ -57,7 +57,7 @@ namespace Practicum.Models.Kurs
                 tpp = 340;
                 tdkEtalon = 219;
                 tdnEtalon = 650;
-                Vd0 = 60000 / 3600;
+                Vd0 = 16.66;
                 Sopr = 1.1 * 1000;
             }
             if (ki.KUcount == 60 && ki.P == 4.5)
@@ -66,7 +66,7 @@ namespace Practicum.Models.Kurs
                 tpp = 392;
                 tdkEtalon = 252;
                 tdnEtalon = 850;
-                Vd0 = 60000 / 3600;
+                Vd0 = 16.66;
                 Sopr = 1.15 * 1000;
             }
             if (ki.KUcount == 80 && ki.P == 1.8)
@@ -75,7 +75,7 @@ namespace Practicum.Models.Kurs
                 tpp = 336;
                 tdkEtalon = 216;
                 tdnEtalon = 650;
-                Vd0 = 80000 / 3600;
+                Vd0 = 22.22;
                 Sopr = 1.19 * 1000;
             }
             if (ki.KUcount == 80 && ki.P == 4.5)
@@ -84,7 +84,7 @@ namespace Practicum.Models.Kurs
                 tpp = 385;
                 tdkEtalon = 248;
                 tdnEtalon = 850;
-                Vd0 = 80000 / 3600;
+                Vd0 = 22.22;
                 Sopr = 1.24 * 1000;
             }
             if (ki.KUcount == 100 && ki.P == 1.8)
@@ -93,7 +93,7 @@ namespace Practicum.Models.Kurs
                 tpp = 382;
                 tdkEtalon = 242;
                 tdnEtalon = 850;
-                Vd0 = 100000 / 3600;
+                Vd0 = 27.77;
                 Sopr = 1.20 * 1000;
             }
             if (ki.KUcount == 100 && ki.P == 4.5)
@@ -102,7 +102,7 @@ namespace Practicum.Models.Kurs
                 tpp = 360;
                 tdkEtalon = 242;
                 tdnEtalon = 850;
-                Vd0 = 100000 / 3600;
+                Vd0 = 27.77;
                 Sopr = 1.14 * 1000;
             }
             if (ki.KUcount == 125 && ki.P == 1.8)
@@ -111,7 +111,7 @@ namespace Practicum.Models.Kurs
                 tpp = 365;
                 tdkEtalon = 220;
                 tdnEtalon = 850;
-                Vd0 = 125000 / 3600;
+                Vd0 = 34.72;
                 Sopr = 1.10 * 1000;
             }
             if (ki.KUcount == 125 && ki.P == 4.5)
@@ -120,7 +120,7 @@ namespace Practicum.Models.Kurs
                 tpp = 385;
                 tdkEtalon = 230;
                 tdnEtalon = 850;
-                Vd0 = 125000 / 3600;
+                Vd0 = 34.72;
                 Sopr = 1.15 * 1000;
             }
             if (ki.KUcount == 150 )
@@ -129,7 +129,7 @@ namespace Practicum.Models.Kurs
                 tpp = 393;
                 tdkEtalon = 213;
                 tdnEtalon = 850;
-                Vd0 = 150000 / 3600;
+                Vd0 = 41.66;
                 Sopr = 1.13 * 1000;               
             }
             return new KUParams { _ParPros = ParPros, _tpp = tpp, _tdnEtalon = tdnEtalon, _tdkEtalon = tdkEtalon, _Vd0 = Vd0, _Sopr = Sopr };

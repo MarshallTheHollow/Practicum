@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Practicum.Models;
+using Practicum.Models.Kurs;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -41,10 +42,31 @@ namespace Practicum.Controllers
             ViewBag.Templist = oC.calc(oI).Templist;
             return View();
         }
-
         public IActionResult KURS()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult KURSOutput(KursInput ki)
+        {
+            KursPIP pip = new KursPIP();   
+            KursPP pp = new KursPP();
+            KursIS iis = new KursIS();
+            KursEconomiser econ = new KursEconomiser();
+            Output op = econ.EconomiserCount(ki, pip, pp, iis);
+            ViewBag.ParoProisvod = Math.Round(op.ParoProisvod,4);
+            ViewBag.Qvip = Math.Round(op.Qvip, 4);
+            ViewBag.Qpp = Math.Round(op.Qpp, 4);
+            ViewBag.Ekv = Math.Round(op.Ekv, 4);
+            ViewBag.Epv = Math.Round(op.Epv, 4);
+            ViewBag.Enp = Math.Round(op.Enp, 4);
+            ViewBag.EppR = Math.Round(op.EppR, 4);
+            ViewBag.EppT = Math.Round(op.EppT, 4);
+            ViewBag.PogRech = Math.Round(op.PogRech, 4);
+            var Temperatureslists = new List<double>() { Math.Round(pip.PIPCalc(ki), 4), Math.Round(pp.PPCalc(ki, pip), 4), Math.Round(iis.ISCalc(ki, pp, pip), 4), Math.Round(op.OutputTdk, 4) };
+            ViewBag.Temperatures = Newtonsoft.Json.JsonConvert.SerializeObject(Temperatureslists);
+            return View();           
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
