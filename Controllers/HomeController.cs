@@ -47,6 +47,11 @@ namespace Practicum.Controllers
             return View();
         }
 
+        public IActionResult OTMSeasteregg()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult KURSOutput(KursInput ki)
         {
@@ -55,6 +60,7 @@ namespace Practicum.Controllers
             KursIS iis = new KursIS();
             KursEconomiser econ = new KursEconomiser();
             Output op = econ.EconomiserCount(ki, pip, pp, iis);
+            ViewBag.KU = ki.KUcount;
             ViewBag.ParoProisvod = Math.Round(op.ParoProisvod,4);
             ViewBag.Qvip = Math.Round(op.Qvip, 4);
             ViewBag.Qpp = Math.Round(op.Qpp, 4);

@@ -103,7 +103,18 @@
             </div>
         </div>
     }
-    <div style="text-align:right">
-        <img src="~/css/easteregg.png" width="150" height="150" />
-    </div>
+<div style="text-align:right">
+    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="OTMSeasteregg"><img src="~/css/easteregg.png" width="150" height="150" /></a>
+</div>
 </body>
+
+<script>
+    const notext = document.querySelectorAll('.text');
+    notext.forEach((elem) => {
+        elem.addEventListener('keyup', function (event) {
+            if (isNaN(parseFloat(event.target.value))) {
+                elem.value = '';
+            }
+        })
+    }) 
+</script>

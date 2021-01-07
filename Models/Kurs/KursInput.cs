@@ -9,6 +9,7 @@ namespace Practicum.Models
     {
         public double P { get; set; }
         public int KUcount { get; set; }
+        public double Vd0 { get; set; }
         public double tdn { get; set; }
         public double tpv { get; set; } //100;             
         public double CO2 { get; set; } //0.1;

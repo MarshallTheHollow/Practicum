@@ -39,7 +39,7 @@ namespace Practicum.Models.Kurs
             {
                 tdk -= 0.001;
                 tsr = (tdn + tdk) / 2;
-                Vn0 = kup._Vd0 * (1 + (0.5 * ki.DpodVos));
+                Vn0 = (ki.Vd0/3600) * (1 + (0.5 * ki.DpodVos));
                 Vp0 = Vn0 * (1 + (tsr / 273));
                 w = Vp0 / yp._Ssech;
                 rtn = tdn - tvn;

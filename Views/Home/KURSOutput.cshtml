@@ -5,7 +5,10 @@
 <br />
 
 <body style="background: linear-gradient(#819ef6, #3d46dd)">
-    <div style="width: 50%;">
+    <div class="text-center">
+        <h3>Котел-утилизатор: КУ - @ViewBag.KU</h3>
+    </div>
+    <div style="background-color:rgba(0, 0, 0, 0.15); border-radius: 5px">
         <canvas id="myChart1" style="width: 100%; height: 400px;"></canvas>
     </div>
     <br />
@@ -23,7 +26,7 @@
 
 <script src="~/js/Chart.js"></script>
 <script>
-    var graphDataNames = ['ПИП','ПП','ИС','Экономайзер'];
+    var graphDataNames = ['Предвключенный испарительный пакет', 'Пароперегреватель','Испарительные секции','Водняой экономайзер'];
     var graphDataSums = @Html.Raw(ViewBag.Temperatures);
 
 var ctx = document.getElementById('myChart1').getContext('2d');
