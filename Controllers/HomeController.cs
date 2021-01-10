@@ -39,7 +39,7 @@ namespace Practicum.Controllers
             ViewBag.olist = oC.calc(oI).olist;
             ViewBag.tlist = oC.calc(oI).tlist;
             ViewBag._Tlist = oC.calc(oI)._Tlist;
-            ViewBag.Templist = oC.calc(oI).Templist;
+            ViewBag.Templist = oC.calc(oI).Templist;           
             return View();
         }
         public IActionResult KURS()
@@ -60,6 +60,7 @@ namespace Practicum.Controllers
             KursIS iis = new KursIS();
             KursEconomiser econ = new KursEconomiser();
             Output op = econ.EconomiserCount(ki, pip, pp, iis);
+            ViewBag.error = "error";
             ViewBag.KU = ki.KUcount;
             ViewBag.ParoProisvod = Math.Round(op.ParoProisvod,4);
             ViewBag.Qvip = Math.Round(op.Qvip, 4);
@@ -72,7 +73,14 @@ namespace Practicum.Controllers
             ViewBag.PogRech = Math.Round(op.PogRech, 4);
             var Temperatureslists = new List<double>() { Math.Round(pip.PIPCalc(ki), 4), Math.Round(pp.PPCalc(ki, pip), 4), Math.Round(iis.ISCalc(ki, pp, pip), 4), Math.Round(op.OutputTdk, 4) };
             ViewBag.Temperatures = Newtonsoft.Json.JsonConvert.SerializeObject(Temperatureslists);
-            return View();           
+            if(double.IsNaN(op.ParoProisvod) || op.OutputTdk <0)
+            {
+                return View("KURS", ViewBag.error);
+            }
+            else
+            {
+                return View();
+            }                    
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -14,7 +14,7 @@ namespace Practicum.Models.Kurs
             YachParams yp = kp.PPParams(ki);
             KUParams kup = kp.Parameters(ki);
             KursAllCalc KAC = new KursAllCalc();
-            return KAC.Calc(ki, yp, kup, tdn, ki.TempNagr, kup._tpp);
+            return KAC.Calc(ki, yp, kup, tdn, kup.TempNagr, kup._tpp);
         }
     }
 }

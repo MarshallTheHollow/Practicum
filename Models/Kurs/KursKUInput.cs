@@ -19,6 +19,7 @@ namespace Practicum.Models.Kurs
         public double _tdnEtalon { get; set; }
         public double _tdkEtalon { get; set; }
         public double _Sopr { get; set; }
+        public double TempNagr { get; set; }
     }
     public class KursKUInput
     {  
@@ -27,6 +28,7 @@ namespace Practicum.Models.Kurs
         public double tdnEtalon;
         public double tdkEtalon;       
         public double Sopr;
+        public double _TempNagr;
         public KUParams Parameters(KursInput ki)
         {
             
@@ -37,7 +39,7 @@ namespace Practicum.Models.Kurs
                 tdkEtalon = 248;
                 tdnEtalon = 850;
                 Sopr = 1.12 * 1000;
-                
+                _TempNagr = 206.14;
             }
             if(ki.KUcount == 40 && ki.P == 4.5)
             {
@@ -46,6 +48,7 @@ namespace Practicum.Models.Kurs
                 tdkEtalon = 248;
                 tdnEtalon = 850;
                 Sopr = 1.12 * 1000;
+                _TempNagr = 256.22;
             }
             if (ki.KUcount == 60 && ki.P == 1.8)
             {
@@ -54,6 +57,7 @@ namespace Practicum.Models.Kurs
                 tdkEtalon = 219;
                 tdnEtalon = 650;
                 Sopr = 1.1 * 1000;
+                _TempNagr = 206.14;
             }
             if (ki.KUcount == 60 && ki.P == 4.5)
             {
@@ -62,6 +66,7 @@ namespace Practicum.Models.Kurs
                 tdkEtalon = 252;
                 tdnEtalon = 850;
                 Sopr = 1.15 * 1000;
+                _TempNagr = 256.22;
             }
             if (ki.KUcount == 80 && ki.P == 1.8)
             {
@@ -70,6 +75,7 @@ namespace Practicum.Models.Kurs
                 tdkEtalon = 216;
                 tdnEtalon = 650;
                 Sopr = 1.19 * 1000;
+                _TempNagr = 206.14;
             }
             if (ki.KUcount == 80 && ki.P == 4.5)
             {
@@ -78,6 +84,7 @@ namespace Practicum.Models.Kurs
                 tdkEtalon = 248;
                 tdnEtalon = 850;
                 Sopr = 1.24 * 1000;
+                _TempNagr = 256.22;
             }
             if (ki.KUcount == 100 && ki.P == 1.8)
             {
@@ -86,6 +93,7 @@ namespace Practicum.Models.Kurs
                 tdkEtalon = 242;
                 tdnEtalon = 850;
                 Sopr = 1.20 * 1000;
+                _TempNagr = 206.14;
             }
             if (ki.KUcount == 100 && ki.P == 4.5)
             {
@@ -94,6 +102,7 @@ namespace Practicum.Models.Kurs
                 tdkEtalon = 242;
                 tdnEtalon = 850;
                 Sopr = 1.14 * 1000;
+                _TempNagr = 256.22;
             }
             if (ki.KUcount == 125 && ki.P == 1.8)
             {
@@ -102,6 +111,7 @@ namespace Practicum.Models.Kurs
                 tdkEtalon = 220;
                 tdnEtalon = 850;
                 Sopr = 1.10 * 1000;
+                _TempNagr = 206.14;
             }
             if (ki.KUcount == 125 && ki.P == 4.5)
             {
@@ -110,16 +120,27 @@ namespace Practicum.Models.Kurs
                 tdkEtalon = 230;
                 tdnEtalon = 850;
                 Sopr = 1.15 * 1000;
+                _TempNagr = 256.22;
             }
-            if (ki.KUcount == 150 )
+            if (ki.KUcount == 150 && ki.P ==1.8 )
             {
                 ParPros = 50.5;
                 tpp = 393;
                 tdkEtalon = 213;
                 tdnEtalon = 850;
-                Sopr = 1.13 * 1000;               
+                Sopr = 1.13 * 1000;
+                _TempNagr = 206.14;
             }
-            return new KUParams { _ParPros = ParPros, _tpp = tpp, _tdnEtalon = tdnEtalon, _tdkEtalon = tdkEtalon, _Sopr = Sopr };
+            if (ki.KUcount == 150 && ki.P == 4.5)
+            {
+                ParPros = 50.5;
+                tpp = 393;
+                tdkEtalon = 213;
+                tdnEtalon = 850;
+                Sopr = 1.13 * 1000;
+                _TempNagr = 256.22;
+            }
+            return new KUParams { _ParPros = ParPros, _tpp = tpp, _tdnEtalon = tdnEtalon, _tdkEtalon = tdkEtalon, _Sopr = Sopr, TempNagr = _TempNagr };
         }
         public double S1;
         public double Ntrub;

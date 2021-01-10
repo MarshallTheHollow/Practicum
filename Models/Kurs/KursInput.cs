@@ -21,7 +21,7 @@ namespace Practicum.Models
         public double StepProd { get; set; } // =10
         public double StepBlackPak { get; set; } //= 0.8;
         public double Ksavetemp { get; set; } //= 0.9;
-        public double TempNagr = 206;
+        //public double TempNagr = 206;
         public double S2 = 0.07;
         public double d = 0.032;
         public double Co = 5.67;

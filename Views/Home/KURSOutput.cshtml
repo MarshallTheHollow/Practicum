@@ -8,8 +8,12 @@
     <div class="text-center">
         <h3>Котел-утилизатор: КУ - @ViewBag.KU</h3>
     </div>
-    <div style="background-color:rgba(0, 0, 0, 0.15); border-radius: 5px">
+    <div style="background-color:rgba(0, 0, 0, 0.15); border-radius: 5px; padding: 10px">
         <canvas id="myChart1" style="width: 100%; height: 400px;"></canvas>
+        <p>ПИП - Предвключенный испарительный пакет</p>
+        <p>ПП - Пароперегреватель</p>
+        <p>ИС - Испарительные секции</p>
+        <p>ВЭ - Водняой экономайзер</p>
     </div>
     <br />
     <h3>Паропроизводительность: @ViewBag.ParoProisvod кг/с</h3>
@@ -26,7 +30,7 @@
 
 <script src="~/js/Chart.js"></script>
 <script>
-    var graphDataNames = ['Предвключенный испарительный пакет', 'Пароперегреватель','Испарительные секции','Водняой экономайзер'];
+    var graphDataNames = ['ПИП', 'ПП','ИС','ВЭ'];
     var graphDataSums = @Html.Raw(ViewBag.Temperatures);
 
 var ctx = document.getElementById('myChart1').getContext('2d');
@@ -65,7 +69,7 @@ var myChart = new Chart(ctx, {
         legend: {
             labels: {
                 fontColor: "#eeeeee",
-                fontSize: 18
+                fontSize: 14
             }
         }
     }

@@ -6,6 +6,10 @@
 <br />
 <h4>Исходные данные:</h4>
 <body style="background: linear-gradient(#819ef6, #3d46dd)">
+    @if(ViewBag.error != null)
+    {
+        <p style="color: #ab1818; font-weight:bold; font-size:16px">Введенные вами данные не соответствуют необходимым стандартам.</p>
+    }
     <form action="/Home/KURSOutput" method="post">
         <div class="form-group" style="color:#eeeeee">
             <button class="btn btn-primary" type="button" value="Показать" onclick="this.value=this.value=='Показать'?'Скрыть':'Показать';" style="background-color:#dedeff; color:#0c19ac; font: bold 14px arial">Настройка для продвинутых пользователей</button>
@@ -41,13 +45,14 @@
                 <div>
                     <div style="display:inline-block; margin-right: 2rem">
                         <h6>Температура газа на входе</h6>
-                        <input type="text" class="text" name="ki.tdn" placeholder="tdn" required />
+                        <input type="text" class="TempGtext" name="ki.tdn" placeholder="tdn" required />
                     </div>
                     <div style="display:inline-block">
                         <h6>Температура питательной воды</h6>
-                        <input type="text" class="text" name="ki.tpv" placeholder="tpv" required />
+                        <input type="text" class="TempVtext" name="ki.tpv" placeholder="tpv" required />
                     </div>
-                </div><br />
+                </div>
+                <div class="Twarning-message" style="font-weight: bold; height:1rem"></div><br />
                 <h5>Состав газа (в %)</h5>
                 <div>
                     <div style="display:inline-block; margin-right: 2rem">
@@ -165,27 +170,91 @@
 
     const Vdvalue = document.querySelector('.Vdtext');
     const KUvalue = document.querySelector('.KUtext');
-    Vdvalue.addEventListener('keyup', function (event) {
-        let KUcalc = KUvalue.value * 1000;
+    Vdvalue.addEventListener('keyup', function (event) {       
         if (isNaN(parseFloat(event.target.value))) {
             Vdvalue.value = '';
         }
         if (document.querySelector('.Leshyyk')) {
             document.querySelector('.Leshyyk').remove();
         }
+        VdCheck();
+        ButtCheck();
+    }); 
+
+    KUvalue.addEventListener('change', function (event) {
+        if (document.querySelector('.Leshyyk')) {
+            document.querySelector('.Leshyyk').remove();
+        }
+        VdCheck();
+        ButtCheck();
+    });
+
+    const TempVvalue = document.querySelector('.TempVtext');
+    const TempGvalue = document.querySelector('.TempGtext');
+    TempVvalue.addEventListener('keyup', function (event) {
+        if (isNaN(parseFloat(event.target.value))) {
+            TempVvalue.value = '';
+        }     
+        TempCheck()
+        ButtCheck();
+    }); 
+
+    TempGvalue.addEventListener('keyup', function (event) {
+        if (isNaN(parseFloat(event.target.value))) {
+            TempGvalue.value = '';
+        } 
+        TempCheck()
+        ButtCheck();
+    }); 
+
+    function VdCheck() {
         let textyk;
-        if (Vdvalue.value > (KUcalc + 20000) || Vdvalue.value < (KUcalc-20000)) {
+        let KUcalc = KUvalue.value * 1000;
+        if (Vdvalue.value > (KUcalc + 20000) || Vdvalue.value < (KUcalc - 20000)) {
             textyk = document.createElement("p");
             textyk.classList.add("Leshyyk");
             textyk.textContent = "Расход дымовых газов должен быть в пределах " + (KUcalc - 20000) + "-" + (KUcalc + 20000) + " м³/час";
             textyk.style.color = "#ab1818";
             document.querySelector('.Vdwarning-message').appendChild(textyk);
         }
-        ButtCheck();
-    });
+    }
+
+    function TempCheck() {
+        let Temptextyk; 
+        messageclear();
+        if (TempVvalue.value < 100 || TempVvalue.value > 200) {
+            messageclear();
+            Temptextyk = document.createElement("p");
+            Temptextyk.classList.add("TempLeshyyk");
+            Temptextyk.textContent = "Температура питательной воды должна находится в промежутке от 100-200°С";
+            Temptextyk.style.color = "#ab1818";
+            document.querySelector('.Twarning-message').appendChild(Temptextyk);
+        }
+        if (TempGvalue.value < 600 || TempGvalue.value > 1200) {
+            messageclear();
+            Temptextyk = document.createElement("p");
+            Temptextyk.classList.add("TempLeshyyk");
+            Temptextyk.textContent = "Температура газа на входе должна находится в промежутке от 600-1200°С";
+            Temptextyk.style.color = "#ab1818";
+            document.querySelector('.Twarning-message').appendChild(Temptextyk);
+        }
+        if ((TempGvalue.value < 600 || TempGvalue.value > 1200) && (TempVvalue.value < 100 || TempVvalue.value > 200)) {
+            messageclear();
+            Temptextyk = document.createElement("p");
+            Temptextyk.classList.add("TempLeshyyk");
+            Temptextyk.textContent = "Обе температуры находятся вне допустимых значений (tpv должна быть 100-200, tdn должна быть 600-1200)";
+            Temptextyk.style.color = "#ab1818";
+            document.querySelector('.Twarning-message').appendChild(Temptextyk);
+        }
+        function messageclear() {
+            if (document.querySelector('.TempLeshyyk')) {
+                document.querySelector('.TempLeshyyk').remove();
+            }
+        }
+    }
 
     function ButtCheck() {
-        if (document.querySelector('.warning-percent').textContent != "" || document.querySelector('.warning-Koeff').textContent != "" || document.querySelector('.warning-message').textContent != "" ) {
+        if (document.querySelector('.warning-percent').textContent != "" || document.querySelector('.warning-Koeff').textContent != "" || document.querySelector('.warning-message').textContent != "" || document.querySelector('.Vdwarning-message').textContent != ""  ) {
             console.log(document.querySelector('.warning-percent').textContent);
             document.querySelector('.myprimary').style.display = 'none';
         }
@@ -287,6 +356,42 @@
         }
 
         .KUtext:focus {
+            box-shadow: 0px 0px 10px #ea26e1;
+            outline: none;
+        }
+
+    .TempGtext {
+        background-color: rgba(255, 255, 255, 0.5);
+        width: 15em;
+        color: #222222;
+        border-color: rgba(0, 0, 0, 0.51);
+        border-radius: 10px 10px 10px 10px;
+        padding: 2px;
+    }
+
+        .TempGtext:hover {
+            background-color: rgba(255, 255, 255, 0.75);
+        }
+
+        .TempGtext:focus {
+            box-shadow: 0px 0px 10px #ea26e1;
+            outline: none;
+        }
+
+    .TempVtext {
+        background-color: rgba(255, 255, 255, 0.5);
+        width: 15em;
+        color: #222222;
+        border-color: rgba(0, 0, 0, 0.51);
+        border-radius: 10px 10px 10px 10px;
+        padding: 2px;
+    }
+
+        .TempVtext:hover {
+            background-color: rgba(255, 255, 255, 0.75);
+        }
+
+        .TempVtext:focus {
             box-shadow: 0px 0px 10px #ea26e1;
             outline: none;
         }
