@@ -73,7 +73,7 @@ namespace Practicum.Controllers
             ViewBag.PogRech = Math.Round(op.PogRech, 4);
             var Temperatureslists = new List<double>() { Math.Round(pip.PIPCalc(ki), 4), Math.Round(pp.PPCalc(ki, pip), 4), Math.Round(iis.ISCalc(ki, pp, pip), 4), Math.Round(op.OutputTdk, 4) };
             ViewBag.Temperatures = Newtonsoft.Json.JsonConvert.SerializeObject(Temperatureslists);
-            if(double.IsNaN(op.ParoProisvod) || op.OutputTdk <0)
+            if(ki.tdn == 0 || ki.tpv == 0 || ki.CO2+ki.H2O+ki.N2+ki.O2 != 100 || ki.Vd0 == 0)
             {
                 return View("KURS", ViewBag.error);
             }
