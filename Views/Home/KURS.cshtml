@@ -8,7 +8,7 @@
 <body style="background: linear-gradient(#819ef6, #3d46dd)">
     @if(ViewBag.error != null)
     {
-        <p style="color: #ab1818; font-weight:bold; font-size:16px">Введенные вами данные не соответствуют необходимым стандартам.</p>
+        <p style="color: #f63c3c; font-weight:bold; font-size:16px">Введенные вами данные не соответствуют необходимым стандартам.</p>
     }
     <form action="/Home/KURSOutput" method="post">
         <div class="form-group" style="color:#eeeeee">
@@ -115,7 +115,7 @@
                 text = document.createElement("p");
                 text.classList.add("Lesh");
                 text.textContent = "Пропорции газа должны быть равны в сумме 100";
-                text.style.color = "#ab1818";
+                text.style.color = "#f63c3c";
                 document.querySelector('.warning-message').appendChild(text);
             }
             ButtCheck();
@@ -136,7 +136,7 @@
                 texty = document.createElement("p");
                 texty.classList.add("Leshy");
                 texty.textContent = "Коэффициенты должны быть в промежутке от 0 до 1";
-                texty.style.color = "#ab1818";
+                texty.style.color = "#f63c3c";
                 document.querySelector('.warning-Koeff').appendChild(texty);
             }
             ButtCheck();
@@ -153,7 +153,7 @@
             textyy = document.createElement("p");
             textyy.classList.add("Leshyy");
             textyy.textContent = "Степень продувки должна быть в промежутке от 0 до 100";
-            textyy.style.color = "#ab1818";
+            textyy.style.color = "#f63c3c";
             document.querySelector('.warning-percent').appendChild(textyy);
         }
         ButtCheck();
@@ -214,7 +214,7 @@
             textyk = document.createElement("p");
             textyk.classList.add("Leshyyk");
             textyk.textContent = "Расход дымовых газов должен быть в пределах " + (KUcalc - 20000) + "-" + (KUcalc + 20000) + " м³/час";
-            textyk.style.color = "#ab1818";
+            textyk.style.color = "#f63c3c";
             document.querySelector('.Vdwarning-message').appendChild(textyk);
         }
     }
@@ -227,7 +227,7 @@
             Temptextyk = document.createElement("p");
             Temptextyk.classList.add("TempLeshyyk");
             Temptextyk.textContent = "Температура питательной воды должна находится в промежутке от 100-200°С";
-            Temptextyk.style.color = "#ab1818";
+            Temptextyk.style.color = "#f63c3c";
             document.querySelector('.Twarning-message').appendChild(Temptextyk);
         }
         if (TempGvalue.value < 600 || TempGvalue.value > 850) {
@@ -235,7 +235,7 @@
             Temptextyk = document.createElement("p");
             Temptextyk.classList.add("TempLeshyyk");
             Temptextyk.textContent = "Температура газа на входе должна находится в промежутке от 600-850°С";
-            Temptextyk.style.color = "#ab1818";
+            Temptextyk.style.color = "#f63c3c";
             document.querySelector('.Twarning-message').appendChild(Temptextyk);
         }
         if ((TempGvalue.value < 600 || TempGvalue.value > 850) && (TempVvalue.value < 100 || TempVvalue.value > 200)) {
@@ -243,7 +243,7 @@
             Temptextyk = document.createElement("p");
             Temptextyk.classList.add("TempLeshyyk");
             Temptextyk.textContent = "Обе температуры находятся вне допустимых значений (tpv должна быть 100-200, tdn должна быть 600-850)";
-            Temptextyk.style.color = "#ab1818";
+            Temptextyk.style.color = "#f63c3c";
             document.querySelector('.Twarning-message').appendChild(Temptextyk);
         }
         function messageclear() {
