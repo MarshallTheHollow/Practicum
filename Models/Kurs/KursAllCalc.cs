@@ -70,7 +70,7 @@ namespace Practicum.Models.Kurs
                 AlfaA = 1 - (Math.Exp((-Kst) * ((ki.H2O/100) + (ki.CO2/100)) * Saff));
                 Cpr = ki.Co / ((1 / AlfaA) + (1 / ki.StepBlackPak) - 1);
                 alfadl = (Cpr * ((EpsA / AlfaA) * Math.Pow(((tsr + 273) / 100), 4) - Math.Pow(((tvk + 273) / 100), 4))) / ((tsr+273) - (tvk+273));
-                if(tvk > 207)
+                if(tvk > 270)
                 {
                     AlfaV = 1 / kk.alfaV(ki.P);
                     k = 1 / ((1 / (alfadk + alfadl)) + AlfaV + ki.TermSop);
