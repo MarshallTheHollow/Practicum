@@ -49,7 +49,7 @@ namespace Practicum.Controllers
 
         public IActionResult OTMSeasteregg()
         {
-            return View();
+            return View();        
         }
 
         [HttpPost]
@@ -62,7 +62,7 @@ namespace Practicum.Controllers
             Output op = econ.EconomiserCount(ki, pip, pp, iis);
             ViewBag.error = "error";
             ViewBag.KU = ki.KUcount;
-            ViewBag.ParoProisvod = Math.Round(op.ParoProisvod,4);
+            ViewBag.ParoProisvod = Math.Round(op.ParoProisvod, 4);
             ViewBag.Qvip = Math.Round(op.Qvip, 4);
             ViewBag.Qpp = Math.Round(op.Qpp, 4);
             ViewBag.Ekv = Math.Round(op.Ekv, 4);
